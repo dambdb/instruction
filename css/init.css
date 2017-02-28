@@ -4,12 +4,12 @@ body{
 	height: 100%;
 }
 /*фиксим схопываение*/
-/*.clearfix:after {
+.clearfix:after {
   content: "";
   display: table;
   clear: both;
 }
-*/
+
 
 .blok_one{
 	float:left;
@@ -20,40 +20,27 @@ body{
 .blok_one_t{
 	margin-top:10px;
     background: #fc3; /* Цвет фона */
+	/*max-width:30%;*/
 	max-width:250px;
+	/*min-height:100px;*/
 }
 
 img{
 	max-width:100%;
+	height:auto;
+	
 }
 .text{
 height:30px;
 }
 
-div.allbloc{
+.allbloc{
 	max-height:100%;
 	max-width:100%;
 	position: relative;
 }
 
-@media screen and (max-width: 1260px) {
-  .blok_one {
-    max-height: 30%;
-  }
+.hendtext{
+	
 }
 
-
-
-
-
-
-
-/*
-div.blok{
-	width:100px;
-	height:100px;
-	background: #fc3; /* Цвет фона */
-	/*position: relative;
-	float:left;
-	
-}*/
