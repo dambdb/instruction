@@ -1,1 +1,59 @@
-background:#CD5C5C;
+body{
+	margin-left:5em;
+	margin-right:5em;
+	height: 100%;
+}
+/*фиксим схопываение*/
+/*.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+*/
+
+.blok_one{
+	float:left;
+	margin-right: 20px
+}   
+   
+
+.blok_one_t{
+	margin-top:10px;
+    background: #fc3; /* Цвет фона */
+	max-width:250px;
+}
+
+img{
+	max-width:100%;
+}
+.text{
+height:30px;
+}
+
+div.allbloc{
+	max-height:100%;
+	max-width:100%;
+	position: relative;
+}
+
+@media screen and (max-width: 1260px) {
+  .blok_one {
+    max-height: 30%;
+  }
+}
+
+
+
+
+
+
+
+/*
+div.blok{
+	width:100px;
+	height:100px;
+	background: #fc3; /* Цвет фона */
+	/*position: relative;
+	float:left;
+	
+}*/
