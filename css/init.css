@@ -1,46 +1,69 @@
-body{
-	margin-left:5em;
-	margin-right:5em;
-	height: 100%;
+body {
+    margin-left: 5em;
+    margin-right: 5em;
+    height: 100%;
 }
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+    .jpg_box {
+        max-width: 60%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+    .jpg_box {
+        max-width: 40%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+    .jpg_box {
+        max-width: 20%;
+    }
+}
+
+
 /*фиксим схопываение*/
 .clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 
-.blok_one{
-	float:left;
-	margin-right: 20px
-}   
-   
-
-.blok_one_t{
-	margin-top:10px;
-    background: #fc3; /* Цвет фона */
-	/*max-width:30%;*/
-	max-width:250px;
-	/*min-height:100px;*/
+/*ресайз по блоку jpg_box*/
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-img{
-	max-width:100%;
-	height:auto;
-	
+/*блок обертка img*/
+.jpg_box {
+    margin-top: 10px;
+    float: left;
+    margin-right: 20px;
 }
-.text{
-height:30px;
-}
-
-.allbloc{
-	max-height:100%;
-	max-width:100%;
-	position: relative;
+/*обертка smoll text в блоке*/
+.small_text_top {
+    min-height: 60px;
 }
 
-.hendtext{
-	
-}
+
+
 
