@@ -1,0 +1,102 @@
+body {
+  margin-left: 5em;
+  margin-right: 5em;
+  height: 100%;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/*блок обертка img*/
+
+.image_wrapper {
+  float: left;
+  margin-right: 20px;
+}
+
+/*больше 768*/
+
+@media (min-width: 768px) {
+  .container {
+    width: 650px;
+    font-size: 21px;
+  }
+  .image_wrapper {
+    max-width: 60%;
+  }
+  .image_wrapper {
+    font-size: 22px;
+  }
+  /*больше 992*/
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: auto;
+    font-size: 22px;
+  }
+  .image_wrapper {
+    font-size: 19px;
+  }
+  .image_wrapper {
+    max-width: 40%;
+  }
+}
+
+
+/*больше 1200*/
+
+@media (min-width: 1200px) {
+  .container {
+    width: auto;
+    font-size: 16px;
+  }
+  .image_wrapper {
+    max-width: 18%;
+  }
+  .image_wrapper {
+    font-size: 15px;
+  }
+}
+
+
+/*фиксим схопываение*/
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/*ресайз картинки по блоку image_wrapper*/
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*-------------Text font, size...*/
+
+.image_title {
+  min-height: 75px;
+  text-align: center;
+}
+
+.settings-section_text {
+  text-align: center;
+}
+
+.text_ios {
+  font-weight: bold;
+  text-align: center;
+}
+
+.text_android {
+  font-weight: bold;
+  text-align: center;
+}
