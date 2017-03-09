@@ -198,6 +198,22 @@
       <p class="settings-section_text">Примечание. Данная группа доступна только для чтения.</p>
     </div>
   </div>
+
+  <div class="footer">
+      <form name="request_form" onsubmit="validates(event)">
+      <span class="answer"><!--если статус ОК то отправлено если статус error?--></span>
+          <p><input class="fio" name="name" type="text" placeholder="Hulio Rodrige Gomez"></p>
+          <p><input class="fone" name="phone" type="text" placeholder="+7 952 808 11 59"></p>
+          <p><input class="mail" name="email" type="email" placeholder="google@gmail.com"></p>
+          <p><textarea class="мessages" name="text" type="text" placeholder="Сообщение..."></textarea></p>
+          <button class="btn" type="submit">Отправить</button>
+      </form>
+	  
+  </div>
+
+<script type="text/javascript" src="js/validate.js"></script>
+ 
+ 
 </body>
 
 </html>

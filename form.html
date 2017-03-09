@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="RU">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/main.css" rel="stylesheet" media="all">
+  <link href="js/" rel="stylesheet" media="all">
+  <title>Инструкция</title>
+</head>
+
+<body>
+  <div class="footer">
+      <form name="request_form" onsubmit="validates(event)">
+      <span class="answer"></span>
+          <p><input name="name" type="text" placeholder="Hulio Rodrige Gomez"></p>
+          <p><input name="phone" type="text" placeholder="+7 952 808 11 59"></p>
+          <p><input name="email" type="email" placeholder="google@gmail.com"></p>
+          <p><textarea name="text" type="text" placeholder="Сообщение..."></textarea></p>
+          <button class="btn" type="submit">Отправить</button>
+      </form>
+  </div>
+
+<script type="text/javascript" src="js/validate.js"></script>
+
+</body>
+
+</html>
+<!--console.log(form.elements); елементы формы-->
