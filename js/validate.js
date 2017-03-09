@@ -27,6 +27,29 @@ var formData = new FormData(document.forms.request_form);
     }
   };
 };
+
+
+/*валидация*/
+var validate_input = function (){
+var formData = new FormData(document.forms.request_form);
+
+
+var name_pattern ='/[A-Za-z]{3,}/';
+var fone_pattern ='';
+var email_pattern ='';
+var text_pattern ='';
+
+
+var name = formData.get('name');
+var fone = formData.get('fone');
+var email = formData.get('email');
+var text = formData.get('text');
+
+  }
+}
+
+
 var url="https://test.em70.ru/rav/callback/";
+validate_input();
 request_send(url);
 }
