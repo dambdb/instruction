@@ -106,13 +106,24 @@ img {
   text-align: center;
 }
 
+.answer{
+  display: none;
+}
+
 
 /*стили input-ширина*/
 input[name="name"],[name="phone"],[name="email"],[name="text"] {
   width: 35%;
   color: black;
+  border: 1px;
+  border-style: solid;
 }
+
+
 
 .btn{
   color: black;
+}
+.load_gif{
+  display: none;
 }

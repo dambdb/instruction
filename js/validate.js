@@ -1,95 +1,114 @@
 "use strict";
-var validates = function (event) {
-  event.preventDefault();
-/*-----------------AJAX-ЗАПРОС-ОТВЕТ*/
-var request_send = function (url){
-/*создаем реквест*/
-  var request = new XMLHttpRequest();
-/*open request*/
-  request.open("POST", url/*"https://test.em70.ru/rav/callback/"*/, true);
-/*send request*/
-var formData = new FormData(document.forms.request_form);
-  request.send(formData); 
-/*проверка состояния*/
-  request.onreadystatechange = function() {
-/*если readyState=1,2,3*/
-    if (request.readyState != 4) return;
-/*если ответ получили и он валидный == 200*/
-    if (request.status != 200) {
+/*функция запроса*/
+var request_send = function(url, formData) {
+    var request = new XMLHttpRequest();
+    request.open("POST", url, true);
+    /*var formData = new FormData(document.forms.request_form);*/
+    request.send(formData);
+    request.onreadystatechange = function() {
+        if (request.readyState != 4) return;
+        if (request.status != 200) {
+            alert(request.status + ': ' + request.statusText);
+        } else {
+            console.log(request.responseText);
+            respons_request(JSON.parse(request.responseText));
+        }
+    };
+};
+/*обработка телефона*/
+var phone_substr = function(phone) {
+    return phone.replace(/[+\s]/g, '');
+};
 
-      alert( request.status + ': ' + request.statusText );
-
+/*обработка результата запроса если что-то не корректно отправили*/
+var respons_request = function(JSON_obj) {
+    if (JSON_obj.status == 'ok') {
+        document.getElementsByName('answer_acept')[0].style.display = 'block';
+        document.getElementsByName('answer_error')[0].style.display = 'none';
     } else {
-    	/*получаем ответ изменяем состояние заголовка формы на запрос принят*/
-      console.log(request.responseText);
-      /*как в json*/
-      console.log(JSON.parse(request.responseText));
+        document.getElementsByName('answer_error')[0].style.display = 'block';
+        document.getElementsByName('answer_acept')[0].style.display = 'none';
+        if (JSON_obj.fields !== undefined) {
+            for (var i = 0; i < JSON_obj.fields.length; i++) {
+                document.getElementsByName(JSON_obj.fields[i])[0].style.border = '1px red solid';
+            }
+        }
     }
-  };
+
 };
 
 
-/*валидация*/
-var validate_input = function (){
-var formData = new FormData(document.forms.request_form);
 
-/*шаблоны полей*/
-  var name_pattern =/[A-Za-zА-Яа-я]{3,}/g;
-  var fone_pattern =/[A-Za-zА-Яа-я]{6,}/g;
-  var email_pattern =/[A-Za-zА-Яа-я]{3,}/g;
-  var text_pattern =/[A-Za-zА-Яа-я]{3,}/g;
-/*значения полей*/
-  var name = formData.get('name');
-  var fone = formData.get('fone');
-  var email = formData.get('email');
-  var text = formData.get('text');
-/*проверка на true false надо попробавать через масив???*/
-  var name_pattern=name_pattern.test(name);
-  var fone_pattern=fone_pattern.test(fone);
-  var email_pattern=email_pattern.test(email);
-  var text_pattern=text_pattern.test(text);
+/*функция валидации*/
+var validate_input = function(event) {
+    event.preventDefault();
+    document.getElementById("my_btn").disabled = true;
+    /*не работает на быстрой скорости обработки*/
+    document.getElementsByClassName('load_gif')[0].style.display = 'inline';
 
+    var formData = new FormData(document.forms.request_form);
 
+    var name_pattern = /[A-Za-z/s|А-ЯЁа-яё/s]{5,}/g;
+    var phone_pattern = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    var email_pattern = /^(([^<>()!\[\]\\.,;:\s@"]+(\.[^<>()!\[\]\\.,;:\s@"]+)*)|(".+"))@(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})$/;
+    var text_pattern = /[\w\s|А-ЯЁа-яё\s]{10,}/g; /*pattern rewrayt*/
+    var name = formData.get('name');
+    var phone = phone_substr(formData.get('phone'));
+    formData.set('phone', phone);
+    var email = formData.get('email');
+    var text = formData.get('text');
 
-/*в качестве флага беру результат регулярки*/
-    /*валидация имени*/
+    var name_pattern = name_pattern.test(name);
+    var phone_pattern = phone_pattern.test(phone);
+    var email_pattern = email_pattern.test(email);
+    var text_pattern = text_pattern.test(text);
+
+    var flag = true;
     if (name_pattern == true) {
-        /*continue;*/
+        document.getElementsByName('name')[0].style.border = '1px green solid';
     } else {
-        /*менем цвет бордера*/
+        flag = false;
+        document.getElementsByName('name')[0].style.border = '1px red solid';
     }
 
-    /*валидация телефона*/
-    if (fone_pattern == true) {
-        /*continue;*/
+    if (phone_pattern == true) {
+        document.getElementsByName('phone')[0].style.border = '1px green solid';
     } else {
-        /*менем цвет бордера*/
+        flag = false;
+        document.getElementsByName('phone')[0].style.border = '1px red solid';
     }
 
-    /*валидация емаила*/
     if (email_pattern == true) {
-        /*continue;*/
+        document.getElementsByName('email')[0].style.border = '1px green solid';
     } else {
-        /*менем цвет бордера*/
+        flag = false;
+        document.getElementsByName('email')[0].style.border = '1px red solid';
     }
 
-    /*валидация текста*/
     if (text_pattern == true) {
-        /*continue;*/
+        document.getElementsByName('text')[0].style.border = '1px green solid';
     } else {
-        /*менем цвет бордера*/
+        flag = false;
+        document.getElementsByName('text')[0].style.border = '1px red solid';
     }
 
-   console.log(name_pattern, fone_pattern, email_pattern, text_pattern);
-/*
-если флаг не false то вызываем ajax
-иначе continue;
-*/
+    if (flag !== false) {
+        var url = "https://test.em70.ru/rav/callback/";
+        request_send(url, formData);
+        document.getElementsByName('answer_error')[0].style.display = 'none';
+        document.getElementsByName('answer_acept')[0].style.display = 'block';
+        /*не работает на быстрой скорости обработки*/
+        document.getElementById("my_btn").disabled = false;
+        document.getElementsByClassName('load_gif')[0].style.display = 'none';
+    } else {
+        document.getElementsByName('answer_error')[0].style.display = 'block';
+        document.getElementsByName('answer_acept')[0].style.display = 'none';
+        /*не работает на быстрой скорости обработки*/
+        document.getElementById("my_btn").disabled = false;
+        document.getElementsByClassName('load_gif')[0].style.display = 'none';
+        return false;
+    }
+};
 
-}
 
 
-var url="https://test.em70.ru/rav/callback/";
-validate_input();
-request_send(url);
-}
